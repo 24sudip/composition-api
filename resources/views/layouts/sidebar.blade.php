@@ -21,4 +21,23 @@
             </ul>
         </div>
     </div>
+    <div class="card my-3">
+        <div class="card-header bg-white text-center">
+            <h3 class="mt-2">
+                Tags
+            </h3>
+        </div>
+        <div class="card-body">
+            <div class="d-flex flex-wrap justify-content-start align-items-center">
+                @foreach ($tags as $tag)
+                <span class="bg-light rounded fw-bold mx-1 mb-1">
+                    <a class="btn btn-link text-decoration-none text-dark" href="{{ route('tag.posts', $tag) }}">
+                        {{ $tag->name }}
+                    </a>
+                </span>
+                @endforeach
+            </div>
+        </div>
+    </div>
 </div>
+

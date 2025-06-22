@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{PostController, SettingController};
+use App\Http\Controllers\Admin\AdminController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -15,4 +16,11 @@ Route::get('/posts/{post}/show', [PostController::class, 'show'])->name('posts.s
 
 // setting routes
 Route::get('/change/{lang}/lang', [SettingController::class, 'toggleLang'])->name('change.lang');
+
+// admin routes
+Route::prefix("admin")->middleware("admin")->group(function () {
+    Route::post('logout', [AdminController::class, 'logout'])->name('admin.logout');
+});
+Route::post('login', [AdminController::class, 'login'])->name('admin.login');
+Route::post('admin/auth', [AdminController::class, 'auth'])->name('admin.auth');
 

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {
+    protected $guarded = [];
     /**
      * Get the user that owns the Comment
      *

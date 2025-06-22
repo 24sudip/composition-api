@@ -19,14 +19,15 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
-        // $this->call([
-        //     CategorySeeder::class,
-        //     TagSeeder::class,
-        //     PostSeeder::class
-        // ]);
-        foreach (Post::all() as $post) {
-            $tags = Tag::take(rand(1,4))->pluck('id');
-            $post->tags()->sync($tags);
-        }
+        $this->call([
+            // CategorySeeder::class,
+            // TagSeeder::class,
+            // PostSeeder::class,
+            AdminSeeder::class
+        ]);
+        // foreach (Post::all() as $post) {
+        //     $tags = Tag::take(rand(1,4))->pluck('id');
+        //     $post->tags()->sync($tags);
+        // }
     }
 }
