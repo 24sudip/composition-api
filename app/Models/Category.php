@@ -9,6 +9,8 @@ class Category extends Model
 {
     /** @use HasFactory<\Database\Factories\CategoryFactory> */
     use HasFactory;
+
+    protected $fillable = ['name_en','name_bn','slug'];
     /**
      * Get all of the comments for the Category
      *

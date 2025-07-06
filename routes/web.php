@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{PostController, SettingController};
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\CategoryController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -19,8 +20,17 @@ Route::get('/change/{lang}/lang', [SettingController::class, 'toggleLang'])->nam
 
 // admin routes
 Route::prefix("admin")->middleware("admin")->group(function () {
+    Route::get('dashboard', [AdminController::class, 'index'])->name('admin.index');
     Route::post('logout', [AdminController::class, 'logout'])->name('admin.logout');
+    // categories routes
+    Route::get('categories', [CategoryController::class, 'index'])->name('admin.categories.index');
+
+    Route::get('categories/create', [CategoryController::class, 'create'])->name('admin.categories.create');
+    Route::post('categories/store', [CategoryController::class, 'store'])->name('admin.categories.store');
+
+    Route::get('categories/{category}/edit', [CategoryController::class, 'edit'])->name('admin.categories.edit');
+    Route::put('categories/{category}/update', [CategoryController::class, 'update'])->name('admin.categories.update');
 });
-Route::post('login', [AdminController::class, 'login'])->name('admin.login');
+Route::get('admin/login', [AdminController::class, 'login'])->name('admin.login');
 Route::post('admin/auth', [AdminController::class, 'auth'])->name('admin.auth');
 

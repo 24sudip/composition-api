@@ -3,10 +3,23 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
+    /**
+     * Admin Dashboard
+    */
+    public function index() {
+        $categories = Category::all();
+        $posts = Post::all();
+        return view('admin.dashboard')->with([
+            'categories'=>$categories,
+            'posts'=>$posts
+        ]);
+    }
     /**
      * Display the login form
      */
