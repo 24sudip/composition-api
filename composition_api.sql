@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 10, 2025 at 05:46 AM
+-- Generation Time: Jul 12, 2025 at 08:11 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -24,6 +24,30 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `admins`
+--
+
+CREATE TABLE `admins` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `email_verified_at` timestamp NULL DEFAULT NULL,
+  `password` varchar(255) NOT NULL,
+  `remember_token` varchar(100) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `admins`
+--
+
+INSERT INTO `admins` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'admin', 'admin@email.com', '2025-06-21 04:12:26', '$2y$12$E1g2he60JHAd.ndS7p9o0O077zU7SoPeCUUJNJJUnUYGgOspbdJoa', 'FNkG9wtKL2Q3mL915DVkS0aIDCCI9kuYrqrYxBemXkv2geQaJuvpWnOziHBd', '2025-06-21 04:12:27', '2025-06-21 04:12:27');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `cache`
 --
 
@@ -32,6 +56,14 @@ CREATE TABLE `cache` (
   `value` mediumtext NOT NULL,
   `expiration` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `cache`
+--
+
+INSERT INTO `cache` (`key`, `value`, `expiration`) VALUES
+('laravel_cache_03e2fc3c443d366989a99618e1a5f68e', 'i:1;', 1751776593),
+('laravel_cache_03e2fc3c443d366989a99618e1a5f68e:timer', 'i:1751776593;', 1751776593);
 
 -- --------------------------------------------------------
 
@@ -65,7 +97,7 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `name_en`, `name_bn`, `slug`, `created_at`, `updated_at`) VALUES
-(1, 'eum9_en', 'eum9_bn', 'eum9', '2025-04-04 01:00:54', '2025-04-04 01:00:54'),
+(1, 'Evelyn Vargas', 'Kaye Chan', 'evelyn-vargas', '2025-04-04 01:00:54', '2025-07-06 06:01:48'),
 (2, 'totam5_en', 'totam5_bn', 'totam5', '2025-04-04 01:00:54', '2025-04-04 01:00:54'),
 (3, 'iusto6_en', 'iusto6_bn', 'iusto6', '2025-04-04 01:00:54', '2025-04-04 01:00:54'),
 (4, 'sequi6_en', 'sequi6_bn', 'sequi6', '2025-04-04 01:00:54', '2025-04-04 01:00:54'),
@@ -74,7 +106,8 @@ INSERT INTO `categories` (`id`, `name_en`, `name_bn`, `slug`, `created_at`, `upd
 (7, 'omnis8_en', 'omnis8_bn', 'omnis8', '2025-04-04 01:00:54', '2025-04-04 01:00:54'),
 (8, 'repudiandae4_en', 'repudiandae4_bn', 'repudiandae4', '2025-04-04 01:00:54', '2025-04-04 01:00:54'),
 (9, 'dolore10_en', 'dolore10_bn', 'dolore10', '2025-04-04 01:00:54', '2025-04-04 01:00:54'),
-(10, 'pariatur5_en', 'pariatur5_bn', 'pariatur5', '2025-04-04 01:00:54', '2025-04-04 01:00:54');
+(10, 'pariatur5_en', 'pariatur5_bn', 'pariatur5', '2025-04-04 01:00:54', '2025-04-04 01:00:54'),
+(11, 'Knox Richards', 'Nathaniel Winters', 'knox-richards', '2025-07-06 04:45:51', '2025-07-06 04:45:51');
 
 -- --------------------------------------------------------
 
@@ -90,6 +123,15 @@ CREATE TABLE `comments` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `comments`
+--
+
+INSERT INTO `comments` (`id`, `body`, `user_id`, `post_id`, `created_at`, `updated_at`) VALUES
+(1, 'Dolores deserunt et', 1, 2, '2025-06-14 00:17:01', '2025-06-14 00:17:01'),
+(2, 'Quasi voluptatem su', 1, 2, '2025-06-14 03:12:47', '2025-06-14 03:12:47'),
+(3, 'Enim aut corporis do', 1, 4, '2025-06-14 05:15:06', '2025-06-14 05:15:06');
 
 -- --------------------------------------------------------
 
@@ -167,7 +209,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (6, '2025_04_04_043612_create_posts_table', 2),
 (7, '2025_04_04_043714_create_comments_table', 2),
 (8, '2025_04_04_043957_create_post_tag_table', 2),
-(9, '2025_04_05_044830_create_personal_access_tokens_table', 3);
+(9, '2025_04_05_044830_create_personal_access_tokens_table', 3),
+(10, '2025_05_29_102801_add_two_factor_columns_to_users_table', 4),
+(11, '2025_06_21_095223_create_admins_table', 5);
 
 -- --------------------------------------------------------
 
@@ -329,8 +373,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('ewB6tJH7opwNquEHiH5hM1GyxTBta5Ub2OKYPiIw', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiMEZzUGNRUWl5QlVsQ2M5d0NLSGhibDR1cFNRcmhDbXd5ZDMzbGU2ZSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1743845699),
-('ZnFbwEIaVLyP2vDh58zIlMPMa9oyNzTkWjO9vBSk', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiWlF4Z05Gb2lTaVp4cmpPWFNMNkMweURLWHFPeDJZMVVadUZhWXZkYSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDM6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9jYXRlZ29yeS9vbW5pczgvcG9zdHMiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1743859805);
+('pWj4iK4a3HSSSRmeagMmC4Von77e0uh8ULZNMQiR', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiRGN4WWVsb0Rtd2ZIU1ZwSEh5a29nQ1Z5c2hacVNqMW1wSU9TSDhuUiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzM6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbi9sb2dpbiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1751803358);
 
 -- --------------------------------------------------------
 
@@ -383,14 +426,31 @@ CREATE TABLE `users` (
   `email` varchar(255) NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) NOT NULL,
+  `two_factor_secret` text DEFAULT NULL,
+  `two_factor_recovery_codes` text DEFAULT NULL,
+  `two_factor_confirmed_at` timestamp NULL DEFAULT NULL,
   `remember_token` varchar(100) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `two_factor_secret`, `two_factor_recovery_codes`, `two_factor_confirmed_at`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'Leslie England', 'kosu@mailinator.com', NULL, '$2y$12$srOxJoXbo4sVJHpw.JW1iO9YeZXdOMhdFLZAj0p9giY7MqF8vBymG', NULL, NULL, NULL, NULL, '2025-06-12 05:46:07', '2025-06-12 05:46:07');
+
+--
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `admins`
+--
+ALTER TABLE `admins`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `admins_email_unique` (`email`);
 
 --
 -- Indexes for table `cache`
@@ -501,16 +561,22 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `admins`
+--
+ALTER TABLE `admins`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -528,7 +594,7 @@ ALTER TABLE `jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -558,7 +624,7 @@ ALTER TABLE `tags`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables

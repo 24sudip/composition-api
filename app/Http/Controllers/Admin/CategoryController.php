@@ -65,4 +65,13 @@ class CategoryController extends Controller
             'success' => 'Category Updated Successfully'
         ]);
     }
+    /**
+     * Delete category
+    */
+    public function delete(Category $category) {
+        $category->delete();
+        return redirect()->route('admin.categories.index') ->with([
+            'success'=>'Category Deleted Successfully'
+        ]);
+    }
 }

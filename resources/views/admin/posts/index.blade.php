@@ -1,15 +1,15 @@
-<!-- Do what you can, with what you have, where you are. - Theodore Roosevelt -->
+<!-- I begin to speak only when I am certain what I will say is not better left unsaid. - Cato the Younger -->
 @extends('admin.layouts.app')
 
 @section('title')
-    Categories
+    Posts
 @endsection
 
 @section('content')
 <div class="row my-5">
     @include('admin.layouts.sidebar')
     <div class="col-md-9">
-        <h5>Categories</h5>
+        <h5>Posts</h5>
         <hr>
         <div class="card">
             <div class="card-body">
@@ -18,27 +18,39 @@
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Name EN</th>
-                                <th scope="col">Name BN</th>
+                                <th scope="col">Title EN</th>
+                                <th scope="col">Title BN</th>
+                                <th scope="col">Slug</th>
+                                <th scope="col">Body EN</th>
+                                <th scope="col">Body BN</th>
+                                <th scope="col">Category</th>
+                                <th scope="col">Image</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($categories as $key => $category)
+                            @foreach ($posts as $key => $post)
                             <tr>
                                 <th scope="row">
-                                    {{ ($categories->perPage() * ($categories->currentPage() - 1)) + $key + 1 }}
+                                    {{ ($post->perPage() * ($post->currentPage() - 1)) + $key + 1 }}
                                 </th>
-                                <td>{{ $category->name_en }}</td>
-                                <td>{{ $category->name_bn }}</td>
+                                <td>{{ $post->title_en }}</td>
+                                <td>{{ $post->title_bn }}</td>
+                                <td>{{ $post->slug }}</td>
+                                <td>{{ Str::limit($post->body_en, 50) }}</td>
+                                <td>{{ Str::limit($post->body_bn, 50) }}</td>
+                                <td>{{ $post->category->name_en }}</td>
                                 <td>
-                                    <a href="{{ route('admin.categories.create') }}" class="btn btn-sm btn-primary">
+                                    <img src="https://picsum.photos/id/{{ $post->id }}/60/60" alt="{{ $post->photo }}" class=" rounded">
+                                </td>
+                                <td>
+                                    <a href="{{ route('admin.posts.create') }}" class="btn btn-sm btn-primary">
                                         <i class="fas fa-plus"></i>
                                     </a>
-                                    <a href="{{ route('admin.categories.edit', $category->slug) }}" class="btn btn-sm btn-warning">
+                                    <a href="{{ route('admin.posts.edit', $post->slug) }}" class="btn btn-sm btn-warning">
                                         <i class="fas fa-pencil"></i>
                                     </a>
-                                    <form action="{{ route('admin.categories.delete', $category->slug) }}" method="post">
+                                    <form action="{{ route('admin.posts.delete', $post->slug) }}" method="post">
                                         @csrf
                                         @method('DELETE')
                                         <button onclick="return confirm('Are you sure you want to delete this item?')" class="btn btn-sm btn-danger">
@@ -52,10 +64,11 @@
                     </table>
                 </div>
                 <div class="d-flex justify-content-center">
-                    {{ $categories->links() }}
+                    {{ $posts->links() }}
                 </div>
             </div>
         </div>
     </div>
 </div>
 @endsection
+
