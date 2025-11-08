@@ -32,7 +32,7 @@
                             @foreach ($posts as $key => $post)
                             <tr>
                                 <th scope="row">
-                                    {{ ($post->perPage() * ($post->currentPage() - 1)) + $key + 1 }}
+                                    {{ ($posts->perPage() * ($posts->currentPage() - 1)) + $key + 1 }}
                                 </th>
                                 <td>{{ $post->title_en }}</td>
                                 <td>{{ $post->title_bn }}</td>
@@ -43,11 +43,11 @@
                                 <td>
                                     <img src="https://picsum.photos/id/{{ $post->id }}/60/60" alt="{{ $post->photo }}" class=" rounded">
                                 </td>
-                                <td>
+                                <td class="d-flex flex-column align-items-center">
                                     <a href="{{ route('admin.posts.create') }}" class="btn btn-sm btn-primary">
                                         <i class="fas fa-plus"></i>
                                     </a>
-                                    <a href="{{ route('admin.posts.edit', $post->slug) }}" class="btn btn-sm btn-warning">
+                                    <a href="{{ route('admin.posts.edit', $post->slug) }}" class="btn btn-sm btn-warning my-1">
                                         <i class="fas fa-pencil"></i>
                                     </a>
                                     <form action="{{ route('admin.posts.delete', $post->slug) }}" method="post">
