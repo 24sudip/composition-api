@@ -41,7 +41,8 @@
                                 <td>{{ Str::limit($post->body_bn, 50) }}</td>
                                 <td>{{ $post->category->name_en }}</td>
                                 <td>
-                                    <img src="https://picsum.photos/id/{{ $post->id }}/60/60" alt="{{ $post->photo }}" class=" rounded">
+                                    {{-- <img src="https://picsum.photos/id/{{ $post->id }}/60/60" alt="{{ $post->photo }}" class=" rounded"> --}}
+                                    <img src="{{ asset($post->photo) }}" alt="photo">
                                 </td>
                                 <td class="d-flex flex-column align-items-center">
                                     <a href="{{ route('admin.posts.create') }}" class="btn btn-sm btn-primary">

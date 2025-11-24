@@ -9,6 +9,8 @@ class Post extends Model
 {
     /** @use HasFactory<\Database\Factories\PostFactory> */
     use HasFactory;
+
+    protected $fillable = ['title_en','title_bn','slug','body_en','body_bn','category_id','photo'];
     /**
      * Get the user that owns the Post
      *

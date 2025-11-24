@@ -14,7 +14,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-8 mx-auto">
-                        <form action="{{ route('admin.posts.store') }}" method="post">
+                        <form action="{{ route('admin.posts.store') }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="col">
                                 <div class="mb-3">
